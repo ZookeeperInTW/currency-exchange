@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  appleWebApp: {
+    title: "匯率換算器",
+  },
 };
 
 export default function RootLayout({
