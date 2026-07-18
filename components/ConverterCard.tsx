@@ -22,11 +22,7 @@ export function ConverterCard({ rates }: { rates: RateSnapshot[] }) {
 
   return (
     <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:p-6">
-      <h2 className="text-lg font-semibold text-[var(--color-text)]">
-        輸入外幣金額，換算等值台幣
-      </h2>
-
-      <div className="mt-4">
+      <div>
         <span className="text-sm text-[var(--color-text-muted)]">等值台幣</span>
         <div className="text-[40px] font-extrabold leading-tight text-[var(--color-primary)] sm:text-[56px]">
           {twdFormatter.format(total)}
