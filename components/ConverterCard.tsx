@@ -60,7 +60,7 @@ export function ConverterCard({ rates }: { rates: RateSnapshot[] }) {
 
       <div className="mt-6 border-t border-[var(--color-border)] pt-4">
         <span className="text-sm text-[var(--color-text-muted)]">等值台幣</span>
-        <div className="text-[32px] font-bold leading-tight text-[var(--color-text)] sm:text-[40px]">
+        <div className="text-[40px] font-extrabold leading-tight text-[var(--color-primary)] sm:text-[56px]">
           {twdFormatter.format(total)}
         </div>
       </div>
