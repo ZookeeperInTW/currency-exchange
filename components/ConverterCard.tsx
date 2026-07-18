@@ -16,7 +16,9 @@ export function ConverterCard({ rates }: { rates: RateSnapshot[] }) {
         {rates.map((rate) => {
           const amountText = amounts[rate.currency] ?? "";
           const amountValue = Number(amountText);
-          const hasValidAmount = amountText.trim() !== "" && Number.isFinite(amountValue) && amountValue >= 0;
+          const isEmpty = amountText.trim() === "";
+          const hasValidAmount = !isEmpty && Number.isFinite(amountValue) && amountValue >= 0;
+          const isInvalid = !isEmpty && !hasValidAmount;
           const twd = hasValidAmount ? amountValue * rate.cashBuy : 0;
 
           return (
@@ -40,11 +42,15 @@ export function ConverterCard({ rates }: { rates: RateSnapshot[] }) {
               </label>
               <div className="flex flex-1 flex-col">
                 <span className="text-[32px] font-bold leading-tight text-[var(--color-text)] sm:text-[40px]">
-                  {hasValidAmount ? twdFormatter.format(twd) : twdFormatter.format(0)}
+                  {twdFormatter.format(twd)}
                 </span>
-                <span className="text-[13px] text-[var(--color-text-muted)]">
-                  現金匯率 1 {rate.currency} = {rateFormatter.format(rate.cashBuy)} TWD（{rate.date}）
-                </span>
+                {isInvalid ? (
+                  <span className="text-[13px] text-[var(--color-down)]">請輸入有效的金額</span>
+                ) : (
+                  <span className="text-[13px] text-[var(--color-text-muted)]">
+                    現金匯率 1 {rate.currency} = {rateFormatter.format(rate.cashBuy)} TWD（{rate.date}）
+                  </span>
+                )}
               </div>
             </div>
           );

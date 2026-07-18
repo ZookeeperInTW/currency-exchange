@@ -51,7 +51,7 @@ export function TrendChart({
             <AreaChart data={points} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="var(--color-primary)" stopOpacity={0.2} />
+                  <stop offset="0%" stopColor="var(--color-primary)" stopOpacity={0.08} />
                   <stop offset="100%" stopColor="var(--color-primary)" stopOpacity={0} />
                 </linearGradient>
               </defs>
@@ -72,8 +72,8 @@ export function TrendChart({
                 width={64}
               />
               <Tooltip
-                formatter={(value: number) => [rateFormatter.format(value), "現金買入"]}
-                labelFormatter={(label: string) => label}
+                formatter={(value) => [rateFormatter.format(Number(value)), "現金買入"]}
+                labelFormatter={(label) => String(label)}
                 contentStyle={{
                   borderRadius: 8,
                   borderColor: "var(--color-border)",
