@@ -26,7 +26,7 @@ export function TrendChart({
     <section className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 sm:p-6">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-[var(--color-text)]">
-          近 30 天現金買入匯率趨勢
+          近 30 天現金匯率均價趨勢
         </h2>
       </div>
       <div className="mt-3 flex gap-6 border-b border-[var(--color-border)]">
@@ -72,7 +72,7 @@ export function TrendChart({
                 width={64}
               />
               <Tooltip
-                formatter={(value) => [rateFormatter.format(Number(value)), "現金買入"]}
+                formatter={(value) => [rateFormatter.format(Number(value)), "現金匯率均價"]}
                 labelFormatter={(label) => String(label)}
                 contentStyle={{
                   borderRadius: 8,
@@ -82,7 +82,7 @@ export function TrendChart({
               />
               <Area
                 type="monotone"
-                dataKey="cashBuy"
+                dataKey="rate"
                 stroke="var(--color-primary)"
                 strokeWidth={2}
                 fill="url(#trendFill)"

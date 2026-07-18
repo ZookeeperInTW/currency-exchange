@@ -3,12 +3,12 @@ export type CurrencyCode = "USD" | "JPY" | "PHP";
 export interface RateSnapshot {
   currency: CurrencyCode;
   date: string;
-  cashBuy: number;
+  rate: number;
 }
 
 export interface RatePoint {
   date: string;
-  cashBuy: number;
+  rate: number;
 }
 
 export interface CurrencyData {
@@ -49,10 +49,16 @@ async function fetchCurrencyRange(
   if (!Array.isArray(json.data)) {
     throw new Error(`FinMind 匯率資料格式異常：${currency}`);
   }
-  // 台銀非營業日或缺報價時，cash_buy 會是 0 或 -99，需濾除
+  // 台銀非營業日或缺報價時，cash_buy / cash_sell 會是 0 或 -99，需濾除
   return (json.data as FinMindRow[])
-    .filter((r) => typeof r.cash_buy === "number" && r.cash_buy > 0)
-    .map((r) => ({ date: r.date, cashBuy: r.cash_buy }))
+    .filter(
+      (r) =>
+        typeof r.cash_buy === "number" &&
+        r.cash_buy > 0 &&
+        typeof r.cash_sell === "number" &&
+        r.cash_sell > 0
+    )
+    .map((r) => ({ date: r.date, rate: (r.cash_buy + r.cash_sell) / 2 }))
     .sort((a, b) => a.date.localeCompare(b.date));
 }
 
@@ -70,7 +76,7 @@ export async function getCurrencyData(
         const trend = rows.slice(-days);
         const latestRow = rows[rows.length - 1];
         const latest = latestRow
-          ? { currency, date: latestRow.date, cashBuy: latestRow.cashBuy }
+          ? { currency, date: latestRow.date, rate: latestRow.rate }
           : null;
         return { currency, latest, trend };
       } catch {

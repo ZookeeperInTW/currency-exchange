@@ -13,7 +13,7 @@ export function ConverterCard({ rates }: { rates: RateSnapshot[] }) {
     const isEmpty = amountText.trim() === "";
     const hasValidAmount = !isEmpty && Number.isFinite(amountValue) && amountValue >= 0;
     const isInvalid = !isEmpty && !hasValidAmount;
-    const twd = hasValidAmount ? amountValue * rate.cashBuy : 0;
+    const twd = hasValidAmount ? amountValue * rate.rate : 0;
 
     return { rate, amountText, isInvalid, twd };
   });
@@ -55,7 +55,7 @@ export function ConverterCard({ rates }: { rates: RateSnapshot[] }) {
               <span className="text-[13px] text-[var(--color-down)]">請輸入有效的金額</span>
             ) : (
               <span className="text-[13px] text-[var(--color-text-muted)]">
-                現金匯率 1 {rate.currency} = {rateFormatter.format(rate.cashBuy)} TWD（{rate.date}）
+                現金匯率均價 1 {rate.currency} = {rateFormatter.format(rate.rate)} TWD（{rate.date}）
               </span>
             )}
           </label>

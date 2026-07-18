@@ -30,7 +30,7 @@ export default async function Home() {
           披索・美元・日圓 換算台幣
         </h1>
         <p className="text-base text-[var(--color-text-muted)]">
-          依台灣銀行牌告現金匯率，即時換算等值新台幣
+          依台灣銀行牌告現金匯率均價，即時換算等值新台幣
         </p>
       </header>
 
@@ -46,7 +46,7 @@ export default async function Home() {
       )}
 
       <footer className="mt-4 text-[13px] text-[var(--color-text-muted)]">
-        資料來源：台灣銀行牌告匯率（現金匯率），由 FinMind 提供，每日更新一次，非盤中即時報價。
+        資料來源：台灣銀行牌告匯率（現金匯率均價，即現金買入與現金賣出之平均），由 FinMind 提供，每日更新一次，非盤中即時報價。
       </footer>
     </main>
   );
