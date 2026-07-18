@@ -25,7 +25,15 @@ export function ConverterCard({ rates }: { rates: RateSnapshot[] }) {
       <h2 className="text-lg font-semibold text-[var(--color-text)]">
         輸入外幣金額，換算等值台幣
       </h2>
-      <div className="mt-4 flex flex-col gap-4">
+
+      <div className="mt-4">
+        <span className="text-sm text-[var(--color-text-muted)]">等值台幣</span>
+        <div className="text-[40px] font-extrabold leading-tight text-[var(--color-primary)] sm:text-[56px]">
+          {twdFormatter.format(total)}
+        </div>
+      </div>
+
+      <div className="mt-4 flex flex-col gap-4 border-t border-[var(--color-border)] pt-4">
         {rows.map(({ rate, amountText, isInvalid }) => (
           <label
             key={rate.currency}
@@ -56,13 +64,6 @@ export function ConverterCard({ rates }: { rates: RateSnapshot[] }) {
             )}
           </label>
         ))}
-      </div>
-
-      <div className="mt-6 border-t border-[var(--color-border)] pt-4">
-        <span className="text-sm text-[var(--color-text-muted)]">等值台幣</span>
-        <div className="text-[40px] font-extrabold leading-tight text-[var(--color-primary)] sm:text-[56px]">
-          {twdFormatter.format(total)}
-        </div>
       </div>
     </section>
   );
